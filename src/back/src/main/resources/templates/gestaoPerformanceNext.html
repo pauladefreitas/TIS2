@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/css/style.css">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+    crossorigin="anonymous"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <title>Gestão de Performance</title>
+</head>
+
+<body>
+  <header>
+    <a href="/index"> <img src="img/logospa.png" width="5%"> </a>
+    <ul class="nav justify-content-sm-center align-items-center">
+        <li class="nav-align-items-end">
+            <a class="nav-link link-light" href="/agendamentoGerencia">
+                <h6>GERENCIAR AGENDAMENTOS</h6>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link link-light" href="/avaliacaoGerencia">
+                <h6>GERENCIAR AVALIAÇÕES</h6>
+            </a>
+        </li>
+        <li class="nav-item text-white">
+            <a class="nav-link link-light" href="/gestaoPerformance">
+                <h6>GESTÃO</h6>
+            </a>
+        </li>
+        <li class="nav-item text-white">
+            <a class="nav-link link-light" href="/cadastroServico">
+                <h6>GERENCIAR SERVIÇOS</h6>
+            </a>
+        </li>
+    </ul>
+</header>
+  <main>
+    <h3 id="title">AVALIAÇÃO GERENCIAL</h3>
+    <h5>“Renove sua serenidade, encontre o equilíbrio no nosso spa” </h5>
+    <p> Avaliação do Cliente: </p>
+    <br>
+  </main>
+  <div class="container">
+    <div class="form-group">
+      <div class="form-group">
+        <label for="Avaliação1">
+          Recentemente, tive a oportunidade de visitar o Zen Essence Spa para uma sessão de massagem e gostaria de
+          compartilhar minha experiência.
+          <p></p> **Ambiente e Recepção:** Ao chegar ao Zen Essence Spa, fui calorosamente recebida pela equipe de
+          recepção. O ambiente é tranquilo e acolhedor, com uma decoração elegante e aromas suaves que imediatamente me
+          fizeram sentir relaxada. A música ambiente suave contribuía para a atmosfera serena.
+          <p></p> **Profissionalismo e Atendimento:** O massagista que me atendeu foi extremamente profissional e
+          atencioso. Antes de iniciar a massagem, ele fez uma breve consulta para entender minhas necessidades e áreas
+          de preocupação. Sua abordagem personalizada me deixou confiante de que estava em boas mãos.
+          <p></p> **Qualidade da Massagem:** A massagem em si foi excepcional. O massagista utilizou uma combinação de
+          técnicas que incluíam movimentos suaves e precisos, com a pressão adequada conforme solicitado. Durante a
+          sessão, ele verificou várias vezes se a pressão estava adequada e se eu estava confortável. A atenção aos
+          detalhes foi impressionante, especialmente nos pontos de tensão que mencionei durante a consulta inicial.
+          <p></p> **Produtos Utilizados:** Os óleos e loções utilizados eram de alta qualidade e tinham fragrâncias
+          agradáveis, sem serem excessivamente perfumados. Minha pele ficou suave e hidratada após a massagem, o que foi
+          um bônus agradável.
+          <p></p> Em suma, minha experiência no Zen Essence Spa foi maravilhosa. Desde o momento em que entrei até a
+          conclusão da minha sessão, fui tratada com o máximo cuidado e atenção. A qualidade do serviço de massagem
+          superou minhas expectativas, e eu saí do spa sentindo-me renovada e revigorada. Recomendo fortemente o Zen
+          Essence Spa para qualquer pessoa que esteja em busca de uma experiência de massagem de primeira classe.
+        </label>
+      </div>
+      <p></p>
+      <label for="Pergunta">Deseja marcar reunião:</label>
+      <p></p>
+      <button type="button" class="btn btn-success" id="btn-sim">Sim</button>
+      <div id="popup" class="popup" style="display:none;">
+        <div id="popup-content" class="popup-content"></div>
+      </div>
+      <br>
+      <button type="button" class="btn btn-danger">Não</button>
+    </div>
+    <div class="card-deck" id="avaliacoes-cards">
+
+    </div>
+  </div>
+
+  <aside>
+    <img src="img/hori3.jpg">
+  </aside>
+  <footer>
+    <nav>
+      <p>G2 - Zen Essence Spa</p>
+    </nav>
+  </footer>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const btnSim = document.getElementById('btn-sim');
+      const popup = document.getElementById('popup');
+      const popupContent = document.getElementById('popup-content');
+
+      btnSim.addEventListener('click', showPopup);
+
+      function showPopup() {
+        let popupHTML = '<div class="popup-header">Selecione uma data e horário</div>';
+        popupHTML += '<div class="popup-dates">';
+
+        for (let i = 0; i < 5; i++) {
+          const randomDate = getRandomDate();
+          const randomTime = getRandomTime();
+          popupHTML += `<button class="btn btn-secondary m-1 popup-date" data-date="${randomDate}" data-time="${randomTime}">${randomDate} - ${randomTime}</button>`;
+        }
+
+        popupHTML += '</div>';
+        popupHTML += '<button class="btn btn-primary mt-3" id="btn-agendar">Agendar</button>';
+        popupContent.innerHTML = popupHTML;
+
+        const dates = document.querySelectorAll('.popup-date');
+        dates.forEach(date => {
+          date.addEventListener('click', selectDate);
+        });
+
+        const btnAgendar = document.getElementById('btn-agendar');
+        btnAgendar.addEventListener('click', agendar);
+
+        popup.style.display = 'flex';
+      }
+
+      let selectedDate = '';
+      let selectedTime = '';
+
+      function selectDate(event) {
+        selectedDate = event.target.getAttribute('data-date');
+        selectedTime = event.target.getAttribute('data-time');
+        console.log('Data selecionada:', selectedDate);
+        console.log('Horário selecionado:', selectedTime);
+      }
+
+      function agendar() {
+        if (selectedDate && selectedTime) {
+          console.log(`Evento agendado para: ${selectedDate} às ${selectedTime}`);
+          closePopup();
+        } else {
+          alert('Por favor, selecione uma data e um horário.');
+        }
+      }
+
+      function closePopup() {
+        popup.style.display = 'none';
+      }
+
+      function getRandomDate() {
+        const start = new Date();
+        const end = new Date();
+        end.setDate(end.getDate() + 30); // Next 30 days
+        const date = new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
+        return date.toISOString().split('T')[0]; // YYYY-MM-DD format
+      }
+
+      function getRandomTime() {
+        const hour = Math.floor(Math.random() * (19 - 8 + 1)) + 8; // Between 8 and 19
+        const minute = Math.floor(Math.random() * 6) * 10; // 0, 10, 20, 30, 40, 50
+        return `${hour.toString().padStart(2, '0')}:${minute.toString().padStart(2, '0')}`; // HH:MM format
+      }
+    });
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/css/crudstyle.css">
+    <link rel="stylesheet" href="/css/crud.media-query.css">
+</head>
+<body>
+    <main>
+        <section id="crud">
+            <div id="imagem">
+                <a href="/index"> <img src="img/spahome3.jpg" width="100%"/> </a>
+            </div>
+            <div id="formulario">
+                <img src="img/logospa.png" width="5%"/>
+                <p>Preencha os campos abaixo para criar uma nova conta.</p>
+                <form>
+                    <div class="campo">
+                        <i class="material-icons">person</i>
+                        <input type="text" name="nome" id="inome" placeholder="seu nome" autocomplete="name" required maxlength="50">
+                        <label for="inome">Nome</label>
+                    </div>
+                    <div class="campo">
+                        <i class="material-icons">email</i>
+                        <input type="email" name="email" id="iemail" placeholder="seu e-mail" autocomplete="email" required maxlength="50">
+                        <label for="iemail">E-mail</label>
+                    </div>
+                    <div class="campo">
+                        <i class="material-icons">vpn_key</i>
+                        <input type="password" name="senha" id="isenha" placeholder="sua senha" autocomplete="new-password" required minlength="8" maxlength="20">
+                        <label for="isenha">Senha</label>
+                    </div>
+                    <input id="cadastro" type="submit" value="Cadastrar">
+                </form>
+                <a href="/login">
+                    <button type="button" class="btn" id="loginButton">Já tenho login</button>
+                </a>
+                
+            </div>
+        </section>
+    </main>
+    <script src="/js/cadastro.js"></script>
+</body>
+</html>
